@@ -28,7 +28,7 @@ public class CookieUtil {
 		return null;
 	}
 	
-	private static void writeLoginToken(HttpServletResponse response, String token){
+	public static void writeLoginToken(HttpServletResponse response, String token){
 		Cookie ck = new Cookie(COOKIE_NAME, token);
 		ck.setDomain(COOKIE_DOMAIN);
 		ck.setPath("/");//代表设置在根目录
@@ -40,7 +40,7 @@ public class CookieUtil {
 		response.addCookie(ck);
 	}
 	
-	private static void delLoginToken(HttpServletRequest request, HttpServletResponse response){
+	public static void delLoginToken(HttpServletRequest request, HttpServletResponse response){
 		Cookie[] cks = request.getCookies();
 		if(cks != null){
 			for(Cookie ck : cks){
