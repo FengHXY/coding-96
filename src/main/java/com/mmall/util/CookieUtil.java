@@ -28,10 +28,18 @@ public class CookieUtil {
 		return null;
 	}
 	
+	//X:domain=".happymmall.com"
+    //a:A.happymmall.com            cookie:domain=A.happymmall.com;path="/"
+    //b:B.happymmall.com            cookie:domain=B.happymmall.com;path="/"
+    //c:A.happymmall.com/test/cc    cookie:domain=A.happymmall.com;path="/test/cc"
+    //d:A.happymmall.com/test/dd    cookie:domain=A.happymmall.com;path="/test/dd"
+    //e:A.happymmall.com/test       cookie:domain=A.happymmall.com;path="/test"
+	
 	public static void writeLoginToken(HttpServletResponse response, String token){
 		Cookie ck = new Cookie(COOKIE_NAME, token);
 		ck.setDomain(COOKIE_DOMAIN);
 		ck.setPath("/");//代表设置在根目录
+		ck.setHttpOnly(true);//不允许通过脚本访问，增加安全性
 		
 		//单位是秒
 		//如果这个maxAge不设置的话，cookie就不会写入硬盘，而是写在内存。只在当前页面有效
