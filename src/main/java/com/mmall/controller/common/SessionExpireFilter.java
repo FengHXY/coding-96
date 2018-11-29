@@ -10,9 +10,9 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.client.HttpServerErrorException;
 
-import com.alipay.api.internal.util.StringUtils;
 import com.mmall.common.Const;
 import com.mmall.pojo.User;
 import com.mmall.util.CookieUtil;
@@ -33,7 +33,7 @@ public class SessionExpireFilter implements Filter{
 		HttpServletRequest httpServletRequest = (HttpServletRequest)request;
 		
 		String loginToken = CookieUtil.readLoginToken(httpServletRequest);
-		if(StringUtils.isEmpty(loginToken)){
+		if(StringUtils.isNotEmpty(loginToken)){
 			//判断loginToken是否为空或者“”
 			//如果不为空，符合条件，继续拿user信息
 			String userJsonStr = RedisPoolUtil.get(loginToken);
